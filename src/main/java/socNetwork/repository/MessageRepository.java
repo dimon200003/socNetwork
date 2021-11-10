@@ -1,7 +1,9 @@
-package repository;
+package socNetwork.repository;
 
-import entity.Message;
+import org.springframework.stereotype.Repository;
+import socNetwork.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 

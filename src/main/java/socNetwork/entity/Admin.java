@@ -1,4 +1,4 @@
-package entity;
+package socNetwork.entity;
 
 
 
@@ -24,4 +24,6 @@ public class Admin {
     @Column(name = "admin_password")
     private String adminPassword;
 
+    @Column
+    private String role="ADMIN";
 }

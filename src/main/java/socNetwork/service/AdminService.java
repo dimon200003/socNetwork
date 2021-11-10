@@ -1,8 +1,8 @@
-package service;
+package socNetwork.service;
 
 
 
-import entity.Admin;
+import socNetwork.entity.Admin;
 
 import java.util.List;
 

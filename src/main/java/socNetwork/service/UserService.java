@@ -1,6 +1,6 @@
-package service;
+package socNetwork.service;
 
-import entity.User;
+import socNetwork.entity.User;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public interface UserService {
     User getByName(String name);
     User editUser(User user);
     List<User> getAll();
+    User findByLoginAndPassword(String name, String password);
 }

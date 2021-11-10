@@ -1,8 +1,8 @@
-package service;
+package socNetwork.service;
 
 
 
-import entity.Message;
+import socNetwork.entity.Message;
 
 import java.util.List;
 

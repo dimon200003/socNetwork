@@ -1,10 +1,10 @@
-package service.impl;
+package socNetwork.service.impl;
 
-import entity.Admin;
+import socNetwork.entity.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.AdminRepository;
-import service.AdminService;
+import socNetwork.repository.AdminRepository;
+import socNetwork.service.AdminService;
 
 import java.util.List;
 

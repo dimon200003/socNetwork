@@ -1,10 +1,10 @@
-package service.impl;
+package socNetwork.service.impl;
 
-import entity.Message;
+import socNetwork.entity.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.MessageRepository;
-import service.MessageService;
+import socNetwork.repository.MessageRepository;
+import socNetwork.service.MessageService;
 
 import java.util.List;
 

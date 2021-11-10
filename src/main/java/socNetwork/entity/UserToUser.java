@@ -1,4 +1,4 @@
-package entity;
+package socNetwork.entity;
 
 public class UserToUser {
     private int userId;

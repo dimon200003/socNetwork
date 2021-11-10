@@ -1,9 +1,10 @@
-package entity;
+package socNetwork.entity;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Table(name = "user")
 @Data
 @NoArgsConstructor
-public class User {
+public class User extends RepresentationModel<User> {
 
 
     @Id
@@ -42,5 +43,9 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
+    @Column
+    private String role="USER";
 
+    public User(String format) {
+    }
 }

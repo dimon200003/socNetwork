@@ -1,6 +1,6 @@
-package repository;
+package socNetwork.repository;
 
-import entity.User;
+import socNetwork.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {

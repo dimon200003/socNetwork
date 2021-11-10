@@ -1,10 +1,9 @@
-package entity;
+package socNetwork.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 
 @Entity
@@ -25,21 +24,9 @@ public class Message {
     private int toId;
 
     @Column(name = "message_content")
-    private String Content;
+    private String content;
 
 
-    public Message(int messageId, int fromId, String content, int toId) {
-        this.messageId = messageId;
-        this.fromId = fromId;
-        Content = content;
-        this.toId = toId;
-    }
-
-    public Message(int fromId, String content, int toId) {
-        this.fromId = fromId;
-        Content = content;
-        this.toId = toId;
-    }
 
 
 }

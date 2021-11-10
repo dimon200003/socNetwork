@@ -1,6 +1,6 @@
-package repository;
+package socNetwork.repository;
 
-import entity.Admin;
+import socNetwork.entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
