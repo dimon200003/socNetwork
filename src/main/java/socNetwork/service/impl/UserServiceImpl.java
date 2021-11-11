@@ -1,9 +1,11 @@
 package socNetwork.service.impl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import socNetwork.entity.RoleEntity;
 import socNetwork.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import socNetwork.repository.RoleRepository;
 import socNetwork.repository.UserRepository;
 import socNetwork.service.UserService;
 
@@ -18,12 +20,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RoleRepository roleEntityRepository;
+
 
 
     @Override
     public User addUser(User user) {
-        User savedUser = userRepository.saveAndFlush(user);
-        return savedUser;
+        RoleEntity userRole = roleEntityRepository.findByName("USER");
+        user.setRoleEntity(userRole);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override
@@ -60,5 +67,7 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+
 
 }

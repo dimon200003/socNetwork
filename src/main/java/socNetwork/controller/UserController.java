@@ -48,6 +48,8 @@ public class UserController {
     @GetMapping("/findByName")
     public User findByName(@RequestParam String name) {
 
+
+
         return userService.getByName(name);
     }
 
@@ -62,15 +64,16 @@ public class UserController {
         return userService.editUser(user);
     }
 
-    @RequestMapping("/greeting")
+    @RequestMapping("/test")
     public HttpEntity<User> greeting(
-            @RequestParam(value = "name", defaultValue = "World") String name) {
+            @RequestParam(value = "name", defaultValue = "Word") String name) {
 
         User user = new User(String.format(TEMPLATE, name));
         user.add(linkTo(methodOn(UserController.class).greeting(name)).withSelfRel());
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
 
 
 }

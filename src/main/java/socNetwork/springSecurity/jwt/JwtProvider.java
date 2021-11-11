@@ -25,6 +25,7 @@ public class JwtProvider {
     public String generateToken(String name) {
         Date date = Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setSubject(name)
                 .setExpiration(date)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

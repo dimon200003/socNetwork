@@ -43,8 +43,9 @@ public class User extends RepresentationModel<User> {
     @Column(name = "user_password")
     private String password;
 
-    @Column
-    private String role="USER";
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private RoleEntity roleEntity;
 
     public User(String format) {
     }
