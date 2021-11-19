@@ -2,6 +2,11 @@ package socNetwork.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import socNetwork.entity.User;
 import socNetwork.service.impl.UserServiceImpl;
 
-
 import java.util.List;
+import java.util.stream.Collectors;
 
-
-import static org.hibernate.sql.Template.TEMPLATE;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
@@ -30,17 +33,38 @@ public class UserController {
         return "Hi user!";
     }
 
+
+
+    @GetMapping("/")
+    CollectionModel<EntityModel<User>> findUser(@RequestBody User user,
+                                                @RequestParam(required = false) Integer page,
+                                                @RequestParam(required = false) Integer size) {
+
+        Page<EntityModel<User>> pages = new PageImpl<>(userService.getAll1(PageRequest.of(page, size)).stream().map(user1 -> EntityModel.of(user1,
+                        linkTo(methodOn(UserServiceImpl.class).findByName(user.getName())).withSelfRel()))
+                .collect(Collectors.toList()), PageRequest.of(page, size), 1);
+
+        return CollectionModel.of(pages, linkTo(methodOn(UserController.class).findUser(user, page, size)).withRel("users"));
+    }
+
     @GetMapping("/userList")
     public List<User> userList() {
+        User user = new User();
 
-         return userService.getAll();
+        user.add(linkTo(methodOn(UserController.class).findByName(user.getName())).withSelfRel());
+
+
+        return userService.getAll();
     }
 
 
     @PostMapping("/save")
     public User saveUser(@RequestBody User user) {
 
-        return userService.addUser(user);
+        User user1 = userService.addUser(user);
+        user1.add(linkTo(methodOn(UserController.class).saveUser(user)).withSelfRel());
+
+        return user1;
     }
 
 
@@ -64,12 +88,15 @@ public class UserController {
         return userService.editUser(user);
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test/{name}")
     public HttpEntity<User> greeting(
-            @RequestParam(value = "name", defaultValue = "Word") String name) {
+            @PathVariable String name) {
 
-        User user = new User(String.format(TEMPLATE, name));
+        User user = userService.findByName(name);
+
+
         user.add(linkTo(methodOn(UserController.class).greeting(name)).withSelfRel());
+
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

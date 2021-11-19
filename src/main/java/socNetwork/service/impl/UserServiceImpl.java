@@ -1,5 +1,7 @@
 package socNetwork.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import socNetwork.entity.RoleEntity;
 import socNetwork.entity.User;
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        RoleEntity userRole = roleEntityRepository.findByName("USER");
+        RoleEntity userRole = roleEntityRepository.findByName("ROLE_USER");
         user.setRoleEntity(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
@@ -53,9 +55,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    public Page<User> getAll1(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
     public User findByName(String name) {
         return userRepository.findUserByName(name);
     }
+
+    public User findByAge(int age){return userRepository.findUsersByAge(age);}
 
     @Override
     public User findByLoginAndPassword(String name, String password) {

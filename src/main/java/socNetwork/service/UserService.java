@@ -11,4 +11,5 @@ public interface UserService {
     User editUser(User user);
     List<User> getAll();
     User findByLoginAndPassword(String name, String password);
+
 }

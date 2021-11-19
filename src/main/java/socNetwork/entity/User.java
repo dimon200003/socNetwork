@@ -47,6 +47,9 @@ public class User extends RepresentationModel<User> {
     @JoinColumn(name = "role_id")
     private RoleEntity roleEntity;
 
+
+
+
     public User(String format) {
     }
 }
