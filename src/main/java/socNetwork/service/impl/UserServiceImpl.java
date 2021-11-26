@@ -47,7 +47,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User editUser(User user) {
-        return userRepository.saveAndFlush(user);
+        RoleEntity roleEntity = new RoleEntity();
+        roleEntity.setName("ROLE_USER");
+        roleEntity.setId(1);
+        userRepository.saveAndFlush(user);
+        user.setRoleEntity(roleEntity);
+        return user;
     }
 
     @Override

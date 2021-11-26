@@ -87,6 +87,13 @@ public class UserController {
     public User editUser(@RequestBody User user) {
         return userService.editUser(user);
     }
+    @PostMapping("/test1")
+    public User editUser1(@PathVariable String name, @RequestBody User user) {
+        User user1 = userService.findByName(name);
+        user1 = userService.editUser(user);
+
+        return user1;
+    }
 
     @GetMapping("/test/{name}")
     public HttpEntity<User> greeting(
